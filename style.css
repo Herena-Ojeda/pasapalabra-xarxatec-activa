@@ -162,7 +162,9 @@ footer p {
     backdrop-filter: blur(0px); 
     position: relative;
 }
-
+.contenedor-respuesta {
+    min-height: 200px;
+}
 .letra {
     color:white;
 }

@@ -179,7 +179,7 @@ var numPreguntaActual = -1;
 var countdown;*/
 
 function mostrarPregunta() {
-  // Incrementar el número de la pregunta actual
+  console.log(numPreguntaActual)// Incrementar el número de la pregunta actual
   numPreguntaActual++;
   
   // Si llegamos al final de las preguntas, volvemos al inicio
@@ -269,7 +269,6 @@ var respuesta = document.getElementById("respuesta");
   }
 });*/
 
-document.addEventListener("DOMContentLoaded", function() {
   // Obtener el botón de enviar
   var botonEnviar = document.getElementById("enviar");
   var inputRespuesta = document.getElementById("respuesta");
@@ -277,11 +276,14 @@ document.addEventListener("DOMContentLoaded", function() {
   // Listener para el botón "Enviar"
   botonEnviar.addEventListener("click", function() {
       const respuestaUsuario = inputRespuesta.value.trim().toLowerCase();
+      console.log("entro la función de enviar")
       if (respuestaUsuario === "") {
           alert("Escribe una respuesta o Pasapalabra");
           return;
       }
+      console.log(respuestaUsuario)
       controlarRespuesta(respuestaUsuario);
+
   });
 
   // Listener para la tecla Enter en el input
@@ -295,10 +297,6 @@ document.addEventListener("DOMContentLoaded", function() {
           controlarRespuesta(respuestaUsuario);
       }
   });
-
-  mostrarPregunta(); // Asegura que las preguntas se muestren al inicio
-});
-
 
 //Función que controla la respuesta
 function controlarRespuesta(respuestaUsuario) {
