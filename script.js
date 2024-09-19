@@ -1,7 +1,13 @@
 console.log("JavaScript cargado");
+
 const TOTAL_PREGUNTAS = 26;
-//tiempo del juego
-const TIEMPO_DEL_JUEGO = 180;
+const TIEMPO_DEL_JUEGO = 990;
+
+
+const currentPage = window.location.pathname;
+if (currentPage.includes("index2.html")) {
+  largarTiempo();
+}
 
 //estructura para almacenar las preguntas
 const palabras = [
@@ -27,7 +33,7 @@ const palabras = [
     id:"D",
 	  pista: "Empieza por D",
     pregunta:"Etiqueta HTML que se usa para agrupar contenido o elementos con el fin de organizar mejor la estructura de la página.",
-    respuesta:"evento"
+    respuesta:"div"
   },
   {
     id:"E",
@@ -139,7 +145,7 @@ const palabras = [
   },
   {
     id:"W",
-	pista: "Empieza por ",
+	pista: "Empieza por W ",
     pregunta:"Propiedad de CSS utilizada para establecer el ancho de un elemento.",
     respuesta:"width"
   },
@@ -147,7 +153,7 @@ const palabras = [
     id:"X",
 	pista: "Empieza por X",
     pregunta:"Asociación de empresas tecnológicas de Castellón.",
-    respuesta:"Xarxatec"
+    respuesta:"xarxatec"
   },
   {
     id:"Y",
@@ -163,24 +169,23 @@ const palabras = [
   },
 ]
 
-//preguntas contestadas. 0 es no contestada, 1 es contestada ya sea acierto o fallo
 var preguntasResueltas = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var totalAciertos = 0;
-
-//número de pregunta actual
 var numPreguntaActual = -1;
 
 //Obtener el elemento del cronómetro
 
 const timer = document.getElementById("tiempo");
 
-// Establecer el tiempo inicial en 60 segundos
+// Establecer el tiempo inicial en 180 segundos
 
 let timeLeft = TIEMPO_DEL_JUEGO;
 var countdown;
 
+//función para mostrar la pregunta
+
 function mostrarPregunta() {
-  console.log(numPreguntaActual)// Incrementar el número de la pregunta actual
+  console.log(totalAciertos)
   numPreguntaActual++;
   
   // Si llegamos al final de las preguntas, volvemos al inicio
@@ -189,7 +194,10 @@ function mostrarPregunta() {
   }
 
   // Si quedan preguntas sin contestar
-  if (preguntasResueltas.includes(0)) {
+  if (totalAciertos === 26){
+    window.location = "index3.html";
+
+  } else if (preguntasResueltas.includes(0)) {
     // Buscar la siguiente pregunta no respondida
     while (preguntasResueltas[numPreguntaActual] === 1) {
       numPreguntaActual++;
@@ -207,13 +215,7 @@ function mostrarPregunta() {
     // Actualizar el círculo con la pregunta actual
     const letra = palabras[numPreguntaActual].id;
     document.querySelector(`#${letra}`).classList.add("letra-actual");
-    console.log(document.querySelector(`#${letra}`)); // Deberías ver el elemento correcto en la consola
-
-
-  } else {
-    // Si no quedan preguntas sin responder, redirigir a index3.html
-    window.location = "index3.html"; 
-  }
+  } 
 }
 mostrarPregunta(); // Para iniciar el juego y mostrar la primera pregunta
 
@@ -335,18 +337,18 @@ pasaPalabra.addEventListener("click", function(event) {
 //Función que se encarga de actualizar el tiempo
 
 function largarTiempo() {
- console.log("hola") 
     countdown = setInterval(() => {
     timeLeft--;
     timer.innerText = timeLeft;
-    if (timeLeft < 0) {
+    if (timeLeft <= 0) {
       clearInterval(countdown);
+      window.location = "index4.html";
       mostrarPantallaFinal();
     }
   }, 1000);
 }
 
-//muestro la pantalla final
+//mostrar la pantalla final
 
 function mostrarPantallaFinal() {
   document.getElementById("acertadas").textContent = totalAciertos;
@@ -376,8 +378,3 @@ volverAJugar.addEventListener("click", function(event) {
   largarTiempo();
   mostrarPregunta();
 });
-
-//función activar tiempo al pinchar botón jugar en index 1
-
-var botonJugar = document.getElementById("boton-jugar");
-botonEnviar.addEventListener("click",largarTiempo);
