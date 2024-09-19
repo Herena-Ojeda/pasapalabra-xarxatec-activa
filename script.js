@@ -1,8 +1,7 @@
 console.log("JavaScript cargado");
-
 const TOTAL_PREGUNTAS = 26;
 //tiempo del juego
-//const TIEMPO_DEL_JUEGO = 60;
+const TIEMPO_DEL_JUEGO = 180;
 
 //estructura para almacenar las preguntas
 const palabras = [
@@ -171,12 +170,14 @@ var totalAciertos = 0;
 //número de pregunta actual
 var numPreguntaActual = -1;
 
-//COMENTO TODO ESTO PORQUE NO SÉ SI QUERREMOS TIEMPO O NO AL FINAL
-// Obtener el elemento del cronómetro
-//const timer = document.getElementById("tiempo");
+//Obtener el elemento del cronómetro
+
+const timer = document.getElementById("tiempo");
+
 // Establecer el tiempo inicial en 60 segundos
-/*let timeLeft = TIEMPO_DEL_JUEGO;
-var countdown;*/
+
+let timeLeft = TIEMPO_DEL_JUEGO;
+var countdown;
 
 function mostrarPregunta() {
   console.log(numPreguntaActual)// Incrementar el número de la pregunta actual
@@ -322,6 +323,7 @@ function controlarRespuesta(respuestaUsuario) {
 }
 
 //botón para pasar de pregunta sin contestar
+
 var pasaPalabra = document.getElementById("pasapalabra");
 pasaPalabra.addEventListener("click", function(event) {
   var letra = palabras[numPreguntaActual].id;
@@ -330,40 +332,28 @@ pasaPalabra.addEventListener("click", function(event) {
   mostrarPregunta();
 });
 
-/*var pasaPalabra = document.getElementById("pasapalabra");
-pasaPalabra.addEventListener("click", function(event) {
-  var letra = palabras[numPreguntaActual].id;
-  document.getElementById(letra).classList.remove("letra-actual");
-  mostrarPregunta();
-});*/
+//Función que se encarga de actualizar el tiempo
 
-
-//DE MOMENTO COMENTO TODO ESTO POR SI LO USAMOS
-// Crear la función que se encargará de actualizar el cronómetro cada segundo
-/*function largarTiempo() {
-  countdown = setInterval(() => {
-    // Restar un segundo al tiempo restante
+function largarTiempo() {
+ console.log("hola") 
+    countdown = setInterval(() => {
     timeLeft--;
-
-    // Actualizar el texto del cronómetro con el tiempo restante
     timer.innerText = timeLeft;
-
-    // Si el tiempo llega a 0, detener el cronómetro
     if (timeLeft < 0) {
       clearInterval(countdown);
       mostrarPantallaFinal();
     }
   }, 1000);
-}*/
+}
 
-//ESTO TENDREMOS QUE MOSTRARLO EN EL HTML DE PANTALLA FINAL SI AL FINAL LO CAMBIAMOS. LO COMENTO DE MOMENTO
 //muestro la pantalla final
-/*function mostrarPantallaFinal() {
+
+function mostrarPantallaFinal() {
   document.getElementById("acertadas").textContent = totalAciertos;
   document.getElementById("score").textContent = (totalAciertos * 100) / TOTAL_PREGUNTAS + "% de acierto";
   document.getElementById("pantalla-juego").style.display = "none";
   document.getElementById("pantalla-final").style.display = "block";
-}*/
+}
 
 //botón para volverAJugar el juego
 var volverAJugar = document.getElementById("volverAJugar");
@@ -374,7 +364,6 @@ volverAJugar.addEventListener("click", function(event) {
   totalAciertos = 0;
   preguntasResueltas = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
-  // LO QUE HAN HECHO AQUÍ CREO QUE NO NOS SIRVE, PERO LOS OJOS NO ME VAN YA
   //quito las clases de los círculos
   var circulos = document.getElementsByClassName("circulo");
   for (i = 0; i < circulos.length; i++) {
@@ -384,7 +373,11 @@ volverAJugar.addEventListener("click", function(event) {
 
   //document.getElementById("pantalla-final").style.display = "none";
   //document.getElementById("pantalla-juego").style.display = "block";
-  //largarTiempo();
+  largarTiempo();
   mostrarPregunta();
 });
 
+//función activar tiempo al pinchar botón jugar en index 1
+
+var botonJugar = document.getElementById("boton-jugar");
+botonEnviar.addEventListener("click",largarTiempo);
