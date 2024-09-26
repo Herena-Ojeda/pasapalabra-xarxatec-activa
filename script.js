@@ -9,7 +9,7 @@ if (currentPage.includes("index2.html")) {
   tiempoJuego();
 }
 
-//estructura para almacenar las preguntas
+//almacena las preguntas
 const palabras = [
   {
     id:"A",
@@ -196,13 +196,13 @@ function mostrarPregunta() {
   // Si todas las preguntas están respondidas correctamente (26 aciertos)
   if (totalAciertos === TOTAL_PREGUNTAS) {
     window.location = "index3.html"; // Redirige a index3.html si todas las respuestas son correctas
-    return; // Detenemos la función
+    return; 
   }
 
   // Si todas las preguntas están respondidas pero no necesariamente correctas
   if (!preguntasResueltas.includes(0)) {
     window.location = "index4.html"; // Redirige a index4.html si todas las preguntas están respondidas
-    return; // Detenemos la función
+    return; 
   }
 
   // Si quedan preguntas sin contestar
@@ -227,11 +227,11 @@ function mostrarPregunta() {
 }
 mostrarPregunta(); // Para iniciar el juego y mostrar la primera pregunta
 
-//detecto cada vez que hay un cambio de tecla en el input
+//hay cambios en el input?
 var respuesta = document.getElementById("respuesta");
 
 
-  // Obtener el botón de enviar
+  // enviar
   var botonEnviar = document.getElementById("enviar");
   var inputRespuesta = document.getElementById("respuesta");
 
@@ -292,18 +292,6 @@ pasaPalabra.addEventListener("click", function(event) {
 
   mostrarPregunta();
 });
-
-/*function mostrarPantallaFinal() {
-  document.getElementById("acertadas").textContent = totalAciertos;
-  document.getElementById("score").textContent = (totalAciertos * 100) / TOTAL_PREGUNTAS + "% de acierto";
-  
-  // Calcular los fallos
-  const fallos = TOTAL_PREGUNTAS - totalAciertos;
-  
-  // Mostrar resultados en el nuevo elemento
-  document.getElementById("resultados").textContent = `Acertaste ${totalAciertos} preguntas y fallaste ${fallos} preguntas.`;
-  
-}*/
 
 //Función que se encarga de actualizar el tiempo
 
