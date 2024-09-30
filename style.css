@@ -28,15 +28,6 @@ h2 {
     font-size:30px;
 }
 
-/*.container {
-    position: relative;
-    width: 400px;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}*/
-
 #tiempo {
     font-size: 50px;
     font-weight: bold;
@@ -47,7 +38,7 @@ h2 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 2; /* Para asegurarse de que esté por encima del contenido */
+    z-index: 2; 
 }
 
 #contenedor-instrucciones {
@@ -79,19 +70,6 @@ h2 {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/*.button:hover {
-    background-color: #46ffbc;
-    color: #073174; 
-    transform: scale(1.05); 
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); 
-}*/
-
-/*.button:active {
-    background-color: #073174; 
-    transform: scale(0.98); 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}*/
-
 .botones {
     display: flex;               
     justify-content: flex-start; 
@@ -99,7 +77,6 @@ h2 {
     margin:0px;
     padding:0px;                   
 }
-
 
 footer {
     background-color:#0A1E46;
@@ -141,7 +118,7 @@ footer p {
     transform: translate(-50%, -50%);
     font-family: 'Bebas Neue', sans-serif;
     font-size: 150px;
-    color: rgba(200, 200, 200, 0.2); /* Color claro y medio transparente */
+    color: rgba(200, 200, 200, 0.2); 
     z-index: 0;
     white-space: nowrap;
     pointer-events: none;
@@ -184,7 +161,7 @@ footer p {
     display: flex;
     flex-direction: column; 
     justify-content: flex-start;
-    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    align-items: flex-start; 
     width: 100%;  
     padding: 50px;
     position: relative;
@@ -199,7 +176,7 @@ footer p {
     max-width: 400px;
     margin: 0 auto;
     padding: 50px;
-    background-color: rgba(16, 36, 78, 0.8); /* Fondo con opacidad */
+    background-color: rgba(16, 36, 78, 0.8); 
     color: white;
     border-radius: 10px;
     border: 2px solid rgba(255, 255, 255, 0.5); 
@@ -297,11 +274,11 @@ footer p {
 }
 
 #A {
-    margin-left: 6px;  /* Añade espacio después de la A */
+    margin-left: 6px;  
 }
 
 #Z {
-    margin-right: 8px;  /* Añade espacio antes de la Z */
+    margin-right: 8px;  
 }
 
 #pista {

@@ -9,7 +9,6 @@ if (currentPage.includes("index2.html")) {
   tiempoJuego();
 }
 
-//almacena las preguntas y respuestas
 const palabras = [
   {
     id:"A",
@@ -173,37 +172,32 @@ let preguntasResueltas = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 let totalAciertos = 0;
 let numPreguntaActual = -1;
 
-//cronómetro
 
 const timer = document.getElementById("tiempo");
 
 let tiempoRestante = TIEMPO_DEL_JUEGO;
 var cuantaAtras;
 
-//función para mostrar la pregunta
 
 function mostrarPregunta() {
   console.log(totalAciertos);
   numPreguntaActual++;
   
-  //al llegar al final de las preguntas, volvemos al inicio
   if (numPreguntaActual >= TOTAL_PREGUNTAS) {
     numPreguntaActual = 0;
   }
 
-  //si todas las preguntas están bien contestadas
   if (totalAciertos === TOTAL_PREGUNTAS) {
     window.location = "index3.html"; 
     return; 
   }
 
-  //si todas las preguntas están contestadas, pero no todas están bien
   if (!preguntasResueltas.includes(0)) {
     window.location = "index4.html";
     return; 
   }
 
-  //si aun hay preguntas sin contestar, busca la siguiente pregunta sin respuesta
+
   if (preguntasResueltas.includes(0)) {
     while (preguntasResueltas[numPreguntaActual] === 1) {
       numPreguntaActual++;
@@ -212,65 +206,57 @@ function mostrarPregunta() {
       }
     }
 
-    //se carga la pregunta
     document.getElementById("pista").textContent = palabras[numPreguntaActual].pista;
     document.getElementById("pregunta").textContent = palabras[numPreguntaActual].pregunta;
     console.log(palabras[numPreguntaActual].pista, palabras[numPreguntaActual].pregunta);
 
-    //se actualiza el color del círculo de la letra actual
     const letra = palabras[numPreguntaActual].id;
     document.querySelector(`#${letra}`).classList.add("letra-actual");
   }
 }
 mostrarPregunta();
 
-//se comprueba si hay cambios en el input
+
 let respuesta = document.getElementById("respuesta");
 
+var botonEnviar = document.getElementById("enviar");
+var inputRespuesta = document.getElementById("respuesta");
 
-  //enviar la respuesta
-  var botonEnviar = document.getElementById("enviar");
-  var inputRespuesta = document.getElementById("respuesta");
+botonEnviar.addEventListener("click", function() {
+    const respuestaUsuario = inputRespuesta.value.trim().toLowerCase();
+    console.log("entro la función de enviar")
+    if (respuestaUsuario === "") {
+        alert("Escribe una respuesta o Pasapalabra");
+        return;
+    }
+    console.log(respuestaUsuario)
+    controlarRespuesta(respuestaUsuario);
 
-  //botón "Enviar"
-  botonEnviar.addEventListener("click", function() {
-      const respuestaUsuario = inputRespuesta.value.trim().toLowerCase();
-      console.log("entro la función de enviar")
-      if (respuestaUsuario === "") {
-          alert("Escribe una respuesta o Pasapalabra");
-          return;
-      }
-      console.log(respuestaUsuario)
-      controlarRespuesta(respuestaUsuario);
+});
 
-  });
+inputRespuesta.addEventListener("keyup", function(e) {
+    if (e.key === "Enter") {
+        const respuestaUsuario = inputRespuesta.value.trim().toLowerCase();
+        if (respuestaUsuario === "") {
+            alert("Escribe una respuesta o Pasapalabra");
+            return;
+        }
+        controlarRespuesta(respuestaUsuario);
+    }
+});
 
-  //utilizar "Enter" para enviar el input
-  inputRespuesta.addEventListener("keyup", function(e) {
-      if (e.key === "Enter") {
-          const respuestaUsuario = inputRespuesta.value.trim().toLowerCase();
-          if (respuestaUsuario === "") {
-              alert("Escribe una respuesta o Pasapalabra");
-              return;
-          }
-          controlarRespuesta(respuestaUsuario);
-      }
-  });
 
-//comprueba si la respuesta es correcta
 function controlarRespuesta(respuestaUsuario) {
 
   if (respuestaUsuario == palabras[numPreguntaActual].respuesta) {
     totalAciertos++;
 
-    //cuando la preguntas está bien contestada, se actualiza a 1 y se añade la clase "acierto" para el cambio de color
     preguntasResueltas[numPreguntaActual] = 1;
     var letra = palabras[numPreguntaActual].id;
     document.getElementById(letra).classList.remove("letra-actual");
     document.getElementById(letra).classList.add("acierto");
 
   } else {
-    //cuando la preguntas está bien contestada, se actualiza a 1 y se añade la clase "fallo" para el cambio de color
     preguntasResueltas[numPreguntaActual] = 1;
     var letra = palabras[numPreguntaActual].id;
     document.getElementById(letra).classList.remove("letra-actual");
@@ -280,7 +266,7 @@ function controlarRespuesta(respuestaUsuario) {
   mostrarPregunta();
 }
 
-//botón de pasapalabra
+
 let pasaPalabra = document.getElementById("pasapalabra");
 pasaPalabra.addEventListener("click", function(event) {
   let letra = palabras[numPreguntaActual].id;
@@ -289,7 +275,7 @@ pasaPalabra.addEventListener("click", function(event) {
   mostrarPregunta();
 });
 
-//actualiza el tiempo del cronómetro
+
 function tiempoJuego() {
     cuantaAtras = setInterval(() => {
     tiempoRestante--;
@@ -301,7 +287,7 @@ function tiempoJuego() {
   }, 1000);
 }
 
-//botón de la pantalla final que permite volver a jugar
+
 var volverAJugar = document.getElementById("volverAJugar");
 volverAJugar.addEventListener("click", function(event) {
   numPreguntaActual = -1;
@@ -310,7 +296,6 @@ volverAJugar.addEventListener("click", function(event) {
   totalAciertos = 0;
   preguntasResueltas = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
-  //quita las clases de los círculos de las letras del rosco
   var circulos = document.getElementsByClassName("circulo");
   for (i = 0; i < circulos.length; i++) {
     circulos[i].classList.remove("acierto");
