@@ -184,6 +184,11 @@ footer p {
     backdrop-filter: blur(0px); 
     position: relative;
 }
+.contenedor-pregunta {
+    height: 150px;
+    padding-bottom:10px;
+
+}
 .contenedor-respuesta {
     min-height: 200px;
 }
@@ -351,27 +356,28 @@ font-size: 25px;
 .circulo .letra:nth-child(25) { transform: rotate(254deg) translate(130px) rotate(-254deg); }
 .circulo .letra:nth-child(26) { transform: rotate(268deg) translate(130px) rotate(-268deg); }
 
-    .area-pregunta-respuesta {
-        padding-top: 30px;
-        margin:0px;
-    }
+.area-pregunta-respuesta {
+    padding: 30px 20px;
+    margin:0px;
+    width:80%;
+}
 
-    .area-pregunta {
-        padding: 10px;
-        margin-bottom: 10px;
-    }
+.area-pregunta {
+    padding: 20px;
+    margin-bottom: 10px;
+}
 
-    #pregunta {
+#pregunta {
         font-size: 18px;
         margin-bottom: 10px;
     }
 
-    .respuesta {
+.respuesta {
         font-size: 14px;
         padding: 6px 10px;
         width: 70%;
         margin-bottom: 20px;
-    }
+}
 
     .button {
         font-size: 16px;
